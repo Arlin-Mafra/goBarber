@@ -5,7 +5,8 @@ import Appointment from '../models/Appointment'
 import User from '../models/User'
 import File from '../models/File'
 import Notification from '../schemas/Notifications'
-import Mail from '../../libs/Mail'
+import CancellationMail from '../jobs/CancellationMail'
+import Queue from '../../libs/Queue'
 
 class AppointmentController {
   //create
@@ -115,6 +116,11 @@ class AppointmentController {
           as: 'provider',
           attributes: ['name', 'email'],
         },
+        {
+          model: User,
+          as: 'user',
+          attributes: ['name'],
+        },
       ],
     })
 
@@ -134,10 +140,8 @@ class AppointmentController {
 
     appointment.save()
 
-    await Mail.sendMail({
-      to: `${appointment.provider.name}| <${appointment.provider.email}>`,
-      subject: 'Cancelamento de atendimento',
-      text: 'Tem um novo cancelamento na sua agenda',
+    await Queue.add(CancellationMail.key, {
+      appointment,
     })
 
     return res.json(appointment)
