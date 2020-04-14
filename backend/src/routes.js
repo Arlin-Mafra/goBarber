@@ -9,6 +9,8 @@ import FileController from './app/controllers/FileController'
 import ProviderController from './app/controllers/ProviderCintroller'
 import AppointmentController from './app/controllers/AppointmentController'
 import NotificationController from './app/controllers/NotificationController'
+import AvailableController from './app/controllers/AvailableController'
+import ScheduleController from './app/controllers/ScheduleController'
 import authMiddleware from './app//middlewares/auth'
 const upload = multer(multerConfig)
 
@@ -23,6 +25,10 @@ routes.put('/users', UserController.update)
 routes.get('/users', UserController.index)
 
 routes.get('/providers', ProviderController.index)
+
+routes.get('/schedules', ScheduleController.index)
+
+routes.get('/provider/:providerId/available', AvailableController.index)
 
 routes.post('/files', upload.single('file'), FileController.store)
 
