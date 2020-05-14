@@ -28,7 +28,7 @@ class ScheduleController {
         {
           model: User,
           as: 'user',
-          attributes: ['name', 'email'],
+          attributes: ['name'],
         },
         {
           model: User,

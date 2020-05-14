@@ -1,6 +1,7 @@
 import * as Yup from 'yup'
 
 import User from '../models/User'
+import File from '../models/File'
 
 class UserController {
   async index(req, res) {
@@ -64,7 +65,7 @@ class UserController {
 
     const user = await User.findByPk(req.userId)
 
-    const { email, password, oldPassword } = req.body
+    const { email, oldPassword } = req.body
 
     if (email !== user.email) {
       const emailExists = await User.findOne({ where: { email } })
@@ -79,16 +80,22 @@ class UserController {
     if (oldPassword && !(await user.checkPasswors(oldPassword)))
       return res.status(400).json({ error: 'password not match' })
 
-    const { id, name, provider, password_hash, avatar_id } = await user.update(
-      req.body
-    )
+    await user.update(req.body)
+
+    const { id, name, avatar_id } = await User.findByPk(req.userId, {
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
+    })
 
     return res.json({
       id,
       name,
       email,
-      provider,
-      password_hash,
       avatar_id,
     })
   }
