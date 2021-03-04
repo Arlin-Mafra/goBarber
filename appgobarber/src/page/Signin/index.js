@@ -1,6 +1,7 @@
 import React from 'react'
-import {Text} from 'react-native'
-import {Container} from './styles'
+import {Image} from 'react-native'
+import {Container, Title} from './styles'
+import ImageLogo from '../../assets/logo.png'
 
 
 
@@ -8,7 +9,8 @@ const Signin = () =>{
 
   return(
     <Container>
-      <Text>Ola</Text>
+      <Image source={ImageLogo} />
+      <Title>Faça se logon</Title>
     </Container>
   ) 
 }
