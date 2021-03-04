@@ -19,7 +19,7 @@ routes.post('/sessions', SessionController.store)
 
 //middleware auth
 routes.use(authMiddleware)
-routes.post('/sessions', SessionController.store)
+//routes.post('/sessions', SessionController.store)
 
 routes.put('/users', UserController.update)
 routes.get('/users', UserController.index)
