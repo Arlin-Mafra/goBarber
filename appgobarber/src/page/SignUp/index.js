@@ -1,7 +1,7 @@
 import React from 'react'
 import {Image, ScrollView} from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
-import {Container, Title,BackToSignInButton, BackToSignInButtonText,CreateAccountButton,CreateAccountButtonText} from './styles'
+import {Container, Title,BackToSignInButton, BackToSignInButtonText} from './styles'
 
 import ImageLogo from '../../assets/logo.png'
 import Input from '../../components/Input'
