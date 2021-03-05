@@ -23,13 +23,13 @@ const Signin = ({navigation}) =>{
           <Input name="email" icon="mail" placeholder="E-mail" />
           <Input name="passowrd" icon="lock" placeholder="Senha"/>
 
-          <Button onPress={() => navigation.navigate('SignUp')}>Entrar</Button>
+          <Button >Entrar</Button>
 
           <ForgotPassword>
             <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
           </ForgotPassword>
         </Container>
-        <CreateAccountButton>
+        <CreateAccountButton onPress={() => navigation.navigate('SignUp')}>
           <Icon name="log-in" color="#ff9000" />
           <CreateAccountButtonText>Criar uma conta</CreateAccountButtonText>
         </CreateAccountButton>
