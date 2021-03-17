@@ -1,19 +1,20 @@
   import styled from 'styled-components/native'
 
   export const Container = styled.View`
-  flex:1;
-  align-items:center;
-  justify-content:center;
-
-  padding: 0 30px 150px;
-  `
+    flex: 1;
+    align-items: stretch;
+    justify-content: center;
+    margin-top: 50px;
+    padding: 0 30px 150px;
+  `;
 
   export const Title = styled.Text`
-  font-family:'RobotoSlab-Medium';
-  color: #f4ede8;
-  font-size: 24px;
-  margin: 64px 0 24px;
-  `
+    font-family: 'RobotoSlab-Medium';
+    color: #f4ede8;
+    font-size: 24px;
+    margin: 64px 0 24px;
+    align-self: center;
+  `;
 
 
 
@@ -34,8 +35,9 @@
 
 
   export const BackToSignInButtonText = styled.Text`
-  font-size:18px;
-  font-family:'RobotoSlab-Regular';
-  color:#fff;
-  margin-left:16px;
-  `
+    font-size: 18px;
+    font-family: 'RobotoSlab-Regular';
+    color: #fff;
+    margin-left: 16px;
+    align-self: center;
+  `;
