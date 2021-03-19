@@ -19,14 +19,27 @@ import { Form } from '@unform/mobile';
 import ImageLogo from '../../assets/logo.png';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import * as Yup from 'yup';
+import AuthValidation from '../../validations/AuthValidations';
 
 const Signin = ({ navigation }) => {
   const formRef = useRef(null);
-  const passInputRef = useRef(null)
+  const passInputRef = useRef(null);
 
-  const handleSignIn = useCallback((data, { reset }) => {
-    console.log(data);
-    reset();
+  const handleSignIn = useCallback(async (data, { reset }) => {
+    try {
+      const validFields = await AuthValidation.signin.validate(data, {
+        abortEarly: false,
+        stripUnknown: true,
+      });
+
+      console.log(validFields);
+      reset();
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        console.log(err);
+      }
+    }
   }, []);
 
   return (
@@ -50,16 +63,16 @@ const Signin = ({ navigation }) => {
                 autoCorrect={false}
                 autoCapitalize="none"
                 keyboardType="email-address"
-                returnKeyType='next'
+                returnKeyType="next"
                 onSubmitEditing={() => passInputRef.current.focus()}
               />
               <Input
                 ref={passInputRef}
-                name="passowrd"
+                name="password"
                 icon="lock"
                 placeholder="Senha"
                 secureTextEntry
-                returnKeyType='send'
+                returnKeyType="send"
                 onSubmitEditing={() => formRef.current.submitForm()}
               />
 

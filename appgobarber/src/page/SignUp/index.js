@@ -12,15 +12,28 @@ import {
 import ImageLogo from '../../assets/logo.png';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import * as Yup from 'yup';
+import AuthValidation from '../../validations/AuthValidations';
 
 const SignUp = ({ navigation }) => {
   const formRef = useRef(null);
   const mailInputRef = useRef(null);
   const passInputRef = useRef(null);
 
-  const handleSignIn = useCallback((data, { reset }) => {
-    console.log(data);
-    reset();
+  const handleSignUp = useCallback(async (data, { reset }) => {
+    try {
+      const validFields = await AuthValidation.signUp.validate(data, {
+        abortEarly: false,
+        stripUnknown: true,
+      });
+
+      console.log(validFields);
+      reset();
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        console.log(err);
+      }
+    }
   }, []);
 
   return (
@@ -32,7 +45,7 @@ const SignUp = ({ navigation }) => {
           <Image source={ImageLogo} style={{ alignSelf: 'center' }} />
           <Title>Crie sua conta</Title>
 
-          <Form ref={formRef} onSubmit={handleSignIn}>
+          <Form ref={formRef} onSubmit={handleSignUp}>
             <Input
               name="name"
               icon="user"
@@ -54,7 +67,7 @@ const SignUp = ({ navigation }) => {
             />
             <Input
               ref={passInputRef}
-              name="passowrd"
+              name="password"
               icon="lock"
               placeholder="Senha"
               secureTextEntry
